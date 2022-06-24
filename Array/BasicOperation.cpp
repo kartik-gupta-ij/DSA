@@ -69,7 +69,7 @@ void del(struct Array *arr){
     int i;
     cout<<"Enter The index to be deleted "<<endl;
     cin>> i;
-    if(i<arr->lenght){
+    if(i<arr->lenght and i>-1){
         for(;i<arr->lenght-1;i++){
             arr->A[i]=arr->A[i+1];
         }
