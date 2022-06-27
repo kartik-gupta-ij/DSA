@@ -8,14 +8,14 @@ struct Array
     int lenght;
 };
 
-void display(struct Array arr)
+void display(struct Array *arr)
 {
     int i;
 
 
-    for (i = 0; i < arr.lenght; i++)
+    for (i = 0; i < arr->lenght; i++)
     {
-        cout <<  arr.A[i] <<" ";
+        cout <<  arr->A[i] <<" ";
     }
     cout<<endl;
 }
@@ -69,12 +69,32 @@ void del(struct Array *arr){
     int i;
     cout<<"Enter The index to be deleted "<<endl;
     cin>> i;
+    cout<<"deleted "<<arr->A[i]<< endl;
     if(i<arr->lenght and i>-1){
         for(;i<arr->lenght-1;i++){
             arr->A[i]=arr->A[i+1];
         }
         arr->lenght--;
     }
+
+}
+
+void lSearch(struct Array *arr){
+    int key;
+    cout<<"Enter the Element to be searched : ";
+    cin>>key;
+    int i;
+
+
+    for (i = 0; i < arr->lenght; i++)
+    {
+        if(arr->A[i]==key){
+            cout<<"ELement found at index :"<<i<<endl;
+            return;
+        }
+    }
+    cout<<"ELement is not present in arr"<<endl;
+    cout<<endl;
 
 }
 int main()
@@ -92,9 +112,9 @@ int main()
     // insert(&arr);
     // display(arr);
     tempfill(&arr);
-    display(arr);
-    del(&arr);
-    display(arr);
+    display(&arr);
+    lSearch(&arr);
+    display(&arr);
 
 
 }
