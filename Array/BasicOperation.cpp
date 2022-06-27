@@ -65,21 +65,22 @@ void insert(struct Array *arr){
         }
 }
 
-void del(struct Array *arr){
-    int i;
+int del(struct Array *arr){
+    int i,m;
     cout<<"Enter The index to be deleted "<<endl;
     cin>> i;
-    cout<<"deleted "<<arr->A[i]<< endl;
+    m=arr->A[i];
+    cout<<"deleted "<<m<< endl;
     if(i<arr->lenght and i>-1){
         for(;i<arr->lenght-1;i++){
             arr->A[i]=arr->A[i+1];
         }
         arr->lenght--;
     }
-
+    return m;
 }
 
-void lSearch(struct Array *arr){
+int lSearch(struct Array *arr){
     int key;
     cout<<"Enter the Element to be searched : ";
     cin>>key;
@@ -90,13 +91,113 @@ void lSearch(struct Array *arr){
     {
         if(arr->A[i]==key){
             cout<<"ELement found at index :"<<i<<endl;
-            return;
+            return i;
         }
     }
     cout<<"ELement is not present in arr"<<endl;
     cout<<endl;
+    return -1;
+}
+void swap(int *x,int*y){
+    int temp;
+    temp=*x;
+    *x=*y;
+    *y=temp;
 
 }
+int transportionLinearSearch(struct Array *arr){
+    int key;
+    cout<<"Enter the Element to be searched : ";
+    cin>>key;
+    int i;
+
+
+    for (i = 0; i < arr->lenght; i++)
+    {
+        if(arr->A[i]==key){
+            swap(&arr->A[i],&arr->A[i-1]);
+            cout<<"ELement found at index :"<<i-1<<endl;
+            return i-1;
+        }
+    }
+    cout<<"ELement is not present in arr"<<endl;
+    cout<<endl;
+    return -1;
+}
+
+int moveToHeadLinearSearch(struct Array *arr){
+    int key;
+    cout<<"Enter the Element to be searched : ";
+    cin>>key;
+    int i;
+
+
+    for (i = 0; i < arr->lenght; i++)
+    {
+        if(arr->A[i]==key){
+            swap(&arr->A[i],&arr->A[0]);
+            cout<<"ELement found at index :"<<i-1<<endl;
+            return i-1;
+        }
+    }
+    cout<<"ELement is not present in arr"<<endl;
+    cout<<endl;
+    return -1;
+}
+
+int BinarySearch(struct Array *arr){
+    int key;
+    cout<<"Enter the Element to be searched : ";
+    cin>>key;
+    int mid,l,h;
+    h=arr->lenght;
+    l=0;
+
+    while(l<=h){
+        mid=(l+h)/2;
+        if(arr->A[mid]==key){
+            cout<<"ELement found at index :"<<mid<<endl;
+            return mid;
+        }
+        else if(arr->A[mid]>key){
+            h=mid-1;
+        }
+        else{
+            l=mid+1;
+        }
+    }
+
+
+    cout<<"ELement is not present in arr"<<endl;
+    return -1;
+}
+
+int RBinarySearch(int arr[],int l,int h,int key){
+    int mid;
+
+
+    if(l<=h){
+        mid=(l+h)/2;
+        if(arr[mid]==key){
+            cout<<"ELement found at index :"<<mid<<endl;
+            return mid;
+        }
+        else if(arr[mid]>key){
+            RBinarySearch(arr,l,mid-1,key);
+        }
+        else{
+            RBinarySearch(arr,mid+1,h,key);
+
+        }
+    }else{
+
+
+    cout<<"ELement is not present in arr"<<endl;
+    return -1;}
+    return 0;
+}
+
+
 int main()
 {
     struct Array arr;
@@ -111,9 +212,10 @@ int main()
     // display(arr);
     // insert(&arr);
     // display(arr);
+    // RBinarySearch(arr.A,0,arr.lenght,1);
     tempfill(&arr);
     display(&arr);
-    lSearch(&arr);
+    
     display(&arr);
 
 
