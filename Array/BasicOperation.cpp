@@ -1,13 +1,19 @@
 #include <iostream>
 using namespace std;
 
-struct Array
+struct Array1
 {
     int *A;
     int size;
     int lenght;
 };
 
+struct Array
+{   
+    int A[100];
+    int size;    
+    int lenght;
+};
 void display(struct Array *arr)
 {
     int i;
@@ -31,7 +37,7 @@ void fill(struct Array *arr)
 }
 void tempfill(struct Array *arr)
 {
-    arr->lenght = 5;
+    arr->lenght = 6;
     for (int i = 0; i < arr->lenght; i++)
     {
 
@@ -283,18 +289,65 @@ int avg(struct Array *arr)
           sum = arr->A[i]+sum;
         
     }
-    cout<<sum/arr->lenght<<endl;
-    return sum/arr->lenght;
+    cout<<(float)sum/arr->lenght<<endl;
+    return (float)sum/arr->lenght;
+}
+void reverse(struct Array *arr){
+    int i,j;
+    for(i=0,j=arr->lenght-1;i<arr->lenght/2;i++,j--){
+        swap(&arr->A[j],&arr->A[i]);
+    }
 }
 
-int main()
+int issorted(struct Array *arr){ 
+    int x=arr->A[0];
+    for (int i = 0; i < arr->lenght; i++)
+    {   if(arr->A[i]<x){
+            cout<<"unsorted"<<endl;
+            return -1;}
+        x=arr->A[i];
+    }
+    cout<<"sorted"<<endl;
+    return 1;
+}
+
+void insertsorted(struct Array *arr){
+    int x;
+    cout<<"enter elemenrt: ";
+    cin>>x;
+    int i=arr->lenght-1;
+    while(arr->A[i]>x){
+        arr->A[i+1]=arr->A[i];
+        i--;
+    }
+    arr->A[i+1]=x;
+    arr->lenght++;
+
+
+}
+
+void REarrange(struct Array *arr){
+    int i,j;
+    i=0;
+    j=arr->lenght-1;
+    while(i<j){
+        while(arr->A[i]<0){i++;}
+        while(arr->A[j]>=0){j--;}
+        if(i<j)swap(&arr->A[i],&arr->A[j]);
+
+
+    }
+}
+
+int main1()
 {
-    struct Array arr;
-    int n, i;
-    cout << "Enter the size of Array" << endl;
-    cin >> arr.size;
-    arr.A = new int[arr.size];
-    arr.lenght = 0;
+    // struct Array arr;
+    // int n, i;
+    // cout << "Enter the size of Array" << endl;
+    // cin>>arr.size;
+    // arr.size=10;
+    // arr.A = new int[arr.size];
+    // arr.lenght = 0;
     // fill(&arr);
 
     // append(&arr);
@@ -302,9 +355,50 @@ int main()
     // insert(&arr);
     // display(arr);
     // RBinarySearch(arr.A,0,arr.lenght,1);
-    tempfill(&arr);
-    display(&arr);
-    avg(&arr);
+    // tempfill(&arr);
+    // display(&arr);
+    // REarrange(&arr);
 
-    display(&arr);
+    // display(&arr);
+    return 0;
+}
+
+struct Array*  Merging(Array *a1,Array *a2){
+    int i=0,j=0,k=0;
+    struct Array *D;
+
+    while(i<a1->lenght and j<a2->lenght){
+        if(a1->A[i]<a2->A[j]){
+            D->A[k]=a1->A[i];
+            k++;
+            i++;
+        }else{
+            D->A[k]=a2->A[j];
+            k++;
+            j++;
+        }
+
+    }
+    for(;i<a1->lenght;i++){
+         D->A[k++]=a1->A[i];
+    }
+    for(;j<a2->lenght;j++){
+         D->A[k++]=a2->A[j];
+    }
+    D->lenght=a1->lenght+a2->lenght;
+    D->size=100;
+    return  D;
+}
+int main(){
+    struct Array arr1={{0,2,4,6,8},10,5};
+    struct Array arr2={{1,3,5,7},10,4};
+    display(&arr1);
+    display(&arr2);
+    struct Array *arr;
+    arr=Merging(&arr1,&arr2);
+    display(&arr1);
+    display(&arr2);
+    display(arr);
+
+
 }
