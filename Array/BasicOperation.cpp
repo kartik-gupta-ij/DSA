@@ -389,13 +389,99 @@ struct Array*  Merging(Array *a1,Array *a2){
     D->size=100;
     return  D;
 }
+
+
+struct Array * Union(Array *a1,Array *a2){
+    int i=0,j=0,k=0,c=0;
+    struct Array *D;
+
+    while(i<a1->lenght and j<a2->lenght){
+        if(a1->A[i]<a2->A[j]){
+            D->A[k]=a1->A[i];
+            k++;
+            i++;
+        }else if(a1->A[i]==a2->A[j]){
+            D->A[k]=a1->A[i];
+            k++;
+            i++;
+            j++;
+            c++;}
+        else{
+            D->A[k]=a2->A[j];
+            k++;
+            j++;
+        }
+
+    }
+    for(;i<a1->lenght;i++){
+         D->A[k++]=a1->A[i];
+    }
+    for(;j<a2->lenght;j++){
+         D->A[k++]=a2->A[j];
+    }
+    D->lenght=k;
+    D->size=100;
+    return  D;
+}
+
+struct Array * intersection(Array *a1,Array *a2){
+    int i=0,j=0,k=0,c=0;
+    struct Array *D;
+
+    while(i<a1->lenght and j<a2->lenght){
+        if(a1->A[i]<a2->A[j]){
+            i++;
+        }else if(a1->A[i]==a2->A[j]){
+            D->A[k]=a1->A[i];
+            k++;
+            i++;
+            j++;
+            c++;}
+        else{
+            j++;
+        }
+
+    }
+
+    D->lenght=k;
+    D->size=100;
+    return  D;
+}
+
+struct Array * Diff(Array *a1,Array *a2){
+    int i=0,j=0,k=0,c=0;
+    struct Array *D;
+
+    while(i<a1->lenght and j<a2->lenght){
+        if(a1->A[i]<a2->A[j]){
+            D->A[k]=a1->A[i];
+            k++;
+            i++;
+        }else if(a1->A[i]==a2->A[j]){
+
+            i++;
+            j++;}
+        else{
+            j++;
+        }
+
+    }
+    for(;i<a1->lenght;i++){
+         D->A[k++]=a1->A[i];
+    }
+
+    D->lenght=k;
+    D->size=100;
+    return  D;
+}
+
+
 int main(){
     struct Array arr1={{0,2,4,6,8},10,5};
-    struct Array arr2={{1,3,5,7},10,4};
-    display(&arr1);
-    display(&arr2);
+    struct Array arr2={{1,2,5,7},10,4};
+
     struct Array *arr;
-    arr=Merging(&arr1,&arr2);
+    arr=Diff(&arr1,&arr2);
     display(&arr1);
     display(&arr2);
     display(arr);
