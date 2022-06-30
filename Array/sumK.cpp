@@ -24,9 +24,27 @@ void sumKU(Array arr,int k){
 
     
 }
-int main(){
-    Array arr={{20,6,2,8,9,1},10,6};
+void sumKS(Array arr,int k){
+    int i=0,j=arr.lenght-1;
     
-    sumKU(arr,10);
+    
+    while(i<j){
+        if(arr.A[i]+arr.A[j]==k){
+            cout<<arr.A[i]<<' '<<k-arr.A[i]<<endl;
+            i++;
+            j--;
+        }else if(arr.A[i]+arr.A[j]<k){
+            i++;
+        }else{
+            j--;
+        }
+    }
+
+    
+}
+int main(){
+    Array arr={{1,2,3,7,9,10},10,6};
+    
+    sumKS(arr,10);
 
 }
