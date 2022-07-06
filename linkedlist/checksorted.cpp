@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -26,38 +27,31 @@ void create(int A[], int n)
     }
 }
 
-void Display(Node *p)
+int Csorted(Node *p)
 {
-    while (p->next)
+    int c=p->data;
+    while (p)
     {
-        cout << p->data << endl;
-        p = p->next;
+        if(p->data>=c){
+            c=p->data;
+            p=p->next;
+        }
+        else{
+            return 0;
+        }
     }
+    return 1;
 }
-void RDisplay(Node *p)
-{
-    if (p)
-    {
-        cout << p->data << endl;
-        RDisplay(p->next);
-    }
-}
-void RRDisplay(Node *p)
-{
-    if (p)
-    {
-        RRDisplay(p->next);
-        cout << p->data << endl;
-    }
-}
+
+
 
 int main()
 {
     struct Node *temp;
-    int A[] = {3, 5, 7, 10, 25, 8, 32, 2};
-    create(A, 8);
+    int A[] = {3, 5, 7, 103, 25,52};
+    create(A, 6);
 
-    RRDisplay(first);
+    cout << Csorted(first);
 
     return 0;
 }

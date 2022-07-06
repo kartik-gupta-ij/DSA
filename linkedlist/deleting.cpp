@@ -25,39 +25,67 @@ void create(int A[], int n)
         last = t;
     }
 }
+int count(Node *p)
+{
+    int c = 1;
+    while (p->next)
+    {
+        c++;
+        p = p->next;
+    }
+    return c;
+}
+
+int Delete(Node *p, int pos)
+{
+    Node * q;   
+    int x;
+    if (pos < 0 || pos > count(p))
+    {
+        return 0;
+    }
+    if (pos == 1)
+    {
+        first = p->next;
+        x=p->data;
+        delete p;
+        return x;
+    }
+    else if (pos > 0)
+    {
+        for (int i = 0; i < pos - 1 and p; i++)
+        {
+            q=p;
+            p = p->next;
+        }
+
+        q->next = p->next;
+        x=p->data;
+        delete p;
+        return x;
+        
+        
+    }
+    return 0;
+}
 
 void Display(Node *p)
 {
-    while (p->next)
+    while (p)
     {
         cout << p->data << endl;
         p = p->next;
     }
 }
-void RDisplay(Node *p)
-{
-    if (p)
-    {
-        cout << p->data << endl;
-        RDisplay(p->next);
-    }
-}
-void RRDisplay(Node *p)
-{
-    if (p)
-    {
-        RRDisplay(p->next);
-        cout << p->data << endl;
-    }
-}
-
 int main()
 {
     struct Node *temp;
     int A[] = {3, 5, 7, 10, 25, 8, 32, 2};
     create(A, 8);
+    // Display(first);
 
-    RRDisplay(first);
+    Delete(first, 2);
+    Display(first);
 
     return 0;
 }

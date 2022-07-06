@@ -26,38 +26,51 @@ void create(int A[], int n)
     }
 }
 
-void Display(Node *p)
+void Isorted(Node *p, int key)
 {
-    while (p->next)
+    Node *q, *t;
+    t = new Node;
+    t->data = key;
+    if(first==NULL){
+        t->next=NULL;
+        first=t;
+    }
+    while (p and p->data < key)
     {
-        cout << p->data << endl;
+        q = p;
         p = p->next;
     }
+    if (p == first)
+    {
+        t->next = first;
+        first = t;
+    }
+    else
+    {
+        t->next = q->next;
+        q->next = t;
+    }
 }
+
 void RDisplay(Node *p)
 {
     if (p)
     {
-        cout << p->data << endl;
+        cout << p->data << "  ";
         RDisplay(p->next);
-    }
-}
-void RRDisplay(Node *p)
-{
-    if (p)
-    {
-        RRDisplay(p->next);
-        cout << p->data << endl;
     }
 }
 
 int main()
 {
     struct Node *temp;
-    int A[] = {3, 5, 7, 10, 25, 8, 32, 2};
-    create(A, 8);
+    int A[] = {3, 5, 7, 10, 25};
+    create(A, 5);
 
-    RRDisplay(first);
+    RDisplay(first);
+    cout << "\n";
+    Isorted(first, 1);
+    RDisplay(first);
 
     return 0;
 }
