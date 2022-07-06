@@ -81,7 +81,7 @@ Node * searchMTH(Node *p,int key)
    
 }
 void Display( Node* p){
-while(p->next){
+while(p){
     cout<<p->data<<endl;
     p=p->next;
 }
