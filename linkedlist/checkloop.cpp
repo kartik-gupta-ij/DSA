@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 struct Node
@@ -25,33 +24,32 @@ void create(Node **p, int *A, int n)
     }
 }
 
-void display(Node *p)
-{
-    while (p != NULL)
-    {
-        cout << p->data << " ";
-        p = p->next;
+bool isloop(Node *p){
+    Node *q=NULL;
+    q=p;
+    p=p->next;
+    while(p){
+    if(p!=q ){
+        q=q->next;
+        p=p->next->next;
+        }
+    else{
+        return true;
     }
-    cout << endl;
+        }
+        return false;
 }
-
-void concat(Node *p, Node *q)
-{
-    third = p;
-    while (p->next != NULL)
-        p = p->next;
-    p->next = q;
-}
-
 int main()
 {
     int A[5] = {1, 2, 3, 4, 5};
     int B[7] = {11, 12, 13, 14, 15, 16, 17};
     create(&first, A, 5);
     create(&second, B, 7);
-    display(first);
-    display(second);
-    concat(first, second);
-    display(third);
-    return 0;
+
+    Node *t1,*t2;
+    t1=first->next->next->next->next;
+    t2=first->next->next;
+    t1->next=t2;
+    cout<<isloop(second);
+
 }
