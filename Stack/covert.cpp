@@ -49,9 +49,9 @@ char* convert(char* infix){
     int j = 0;
  
     while (infix[i] != '\0'){
-        if(isOperand(infix[i])){
-            postfix[j++]=infix[i++];
-        }else{
+        if (isOperand(infix[i])){
+            postfix[j++] = infix[i++];
+        } else {
             if (stk.empty() || outPrecedence(infix[i]) > inPrecedence(stk.top())){
                 stk.push(infix[i++]);
             } else if (outPrecedence(infix[i]) == inPrecedence(stk.top())){
@@ -61,12 +61,12 @@ char* convert(char* infix){
                 postfix[j++] = stk.top();
                 stk.pop();
             }
-
         }
-        while(! stk.empty() && stk.top() != ')'){
-            postfix[j++]=stk.top();
-            stk.pop();
-        }
+    }
+ 
+    while (! stk.empty() && stk.top() != ')'){
+        postfix[j++] = stk.top();
+        stk.pop();
     }
  
     postfix[j] = '\0';
