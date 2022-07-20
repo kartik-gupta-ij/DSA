@@ -112,18 +112,13 @@ char *infixToPostflix(char *exp)
             j++;
         }
     fexp[j]='\0';
-    cout<<fexp<<endl;
     return fexp;
 }
 
-int main()
-{
-    char *infix="a+b*c-d/e";
-
-
-    char *postfix=infixToPostflix(infix);
-
-    cout<<postfix<<endl;
+int main(){
+    char infix[] = "((a+b)*c)-d^e^f";
+ 
+    cout << infixToPostflix(infix) << endl;
 
     return 0;
 }
